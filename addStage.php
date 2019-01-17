@@ -25,7 +25,8 @@ if (isset($_POST['submit'])) {
         <meta charset="utf-8">
     </head>
     <body style="margin: 200px;">
-
+        <h2>Nouvelle periode de stage</h2>
+        <br>
         <?php
         if (isset($erreur)) {
             echo $erreur;
@@ -34,16 +35,16 @@ if (isset($_POST['submit'])) {
         <!--	//permet de rentrer de nouvelles infos clients et de les enregistrer dans la bdd-->
         <form method="POST" action="">
             <div class="form-group">
-                <label for="exampleInputPassword1">Annee</label>
+                <label for="">Annee</label>
                 <input type="text" class="form-control" id="example" name="annee" placeholder="Annee">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Date de debut (AAAA-MM-JJ)</label>
-                <input type="text" class="form-control" id="example" name="date_debut" placeholder="Debut">
+                <label for="">Date de debut (AAAA-MM-JJ)</label>
+                <input type="date" class="form-control" id="example" name="date_debut" placeholder="Debut">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Date de fin (AAAA-MM-JJ)</label>
-                <input type="text" class="form-control" id="example" name="date_fin" placeholder="Fin">
+                <label for="">Date de fin (AAAA-MM-JJ)</label>
+                <input type="date" class="form-control" id="example" name="date_fin" placeholder="Fin">
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Ajouter a la base de donnees</button>
             <a class="btn btn-success" href="stage.php?">Retour</a>

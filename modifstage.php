@@ -20,12 +20,13 @@ if (isset($_REQUEST['submit'])) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modifier une periode de stage</title>
+        <title>Modifier periode de stage</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta charset="utf-8">
     </head>
     <body style="margin: 200px;">
-
+        <h2>Modification d'une periode de stage</h2>
+        <br>
         <?php
         if (isset($erreur)) {
             echo $erreur;
@@ -40,19 +41,19 @@ if (isset($_REQUEST['submit'])) {
         <!--	//champs permettant de modifier les infos d'un client et d'enregistrer les modifs dans la bdd-->
         <form method="POST" action="">
             <div class="form-group">
-                <label for="exampleInputPassword1">ID Stage</label>
+                <label for="">ID Stage</label>
                 <input type="text" class="form-control" id="example" name="idperiode" value=<?php echo $row['idperiode']; ?>>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Annee</label>
+                <label for="">Annee</label>
                 <input type="text" class="form-control" id="example" name="annee" value="<?php echo $row['annee']; ?>">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Date de debut (AAAA-MM-JJ)</label>
+                <label for="">Date de debut (AAAA-MM-JJ)</label>
                 <input type="text" class="form-control" id="example" name="date_debut" value="<?php echo $row['date_debut']; ?>">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Date de fin (AAAA-MM-JJ)</label>
+                <label for="">Date de fin (AAAA-MM-JJ)</label>
                 <input type="text" class="form-control" id="example" name="date_fin" value="<?php echo $row['date_fin']; ?>">
             </div>
 
@@ -61,4 +62,3 @@ if (isset($_REQUEST['submit'])) {
         </form>
     </body>
 </html>
-
