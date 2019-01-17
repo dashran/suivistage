@@ -7,7 +7,7 @@
     <ul>
         <li><a href="index.php">Accueil</a></li><!--
         --><li><a href="stage.php">Stages</a></li><!--
-        --><li><a href="adherent.php">Adhérents</a></li><!--
+        --><li><a href="rechercheentreprise.php">Recherche</a></li><!--
         --><li>
             <?php
             if (isset($_SESSION['nomC'])) {

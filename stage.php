@@ -83,7 +83,6 @@ include 'connexion.php';
             <p>
                 <br/>
             <div class="row">
-                <tbody>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
