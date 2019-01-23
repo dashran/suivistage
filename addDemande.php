@@ -29,6 +29,9 @@ if (isset($_POST['submit'])) {
         <title>Ajouter une demande</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta charset="utf-8">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="main.js" type="text/javascript"></script>
     </head>
 
     <body style="margin: 200px;">
@@ -103,16 +106,38 @@ if (isset($_POST['submit'])) {
                 <?php
                 $sql = "SELECT * FROM entreprise";
                 $q = $connection->query($sql);
-                echo "<select name = 'nom' >";
+                echo "<select id = 'entreprise' name = 'nomentreprise' >";
                 while ($ligne = $q->fetch()) {
-                    if ($row['nom'] == $ligne[0])
-                        echo "<option value=" . $ligne[0] . " selected='selected'>" . $ligne[1] . "</option>";
+                    if ($row['nom'] == $ligne[0]){
+                ?>
+                        <option value="<?php echo $ligne[0]; ?>" selected="selected"><?php echo $ligne[1]; ?></option>
+                <?php        
+                    }
                     else
-                        echo "<option value=" . $ligne[0] . ">" . $ligne[1] . "</option>";
+                ?>        
+                        <option value="<?php echo $ligne[0]; ?>"><?php echo $ligne[1]; ?></option>
+                <?php        
                 }
                 echo "</select>";
                 ?> 
                 <a class="btn btn-danger" href="addentreprise.php?">Ajouter une entreprise</a>
+            </div>
+            <div class="form-group">
+                <label for="">Contact</label>
+                <br>
+                <?php
+                $sql = "SELECT * FROM contact";
+                $q = $connection->query($sql);
+                echo "<select name = 'nomcontact' >";
+                while ($ligne = $q->fetch()) {
+                    if ($row['nom'] == $ligne[0])
+                        echo "<option value=" . htmlentities($ligne[0]) . " selected='selected'>" . $ligne[1] . "</option>";
+                    else
+                        echo "<option value=" . htmlentities($ligne[0]) . ">" . $ligne[1] . "</option>";
+                }
+                echo "</select>";
+                ?> 
+                <a class="btn btn-danger" onClick="addcontact()">Ajouter un contact</a>
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Ajouter a la base de donnees</button>
             <a class="btn btn-success" href="stage.php?">Retour</a>

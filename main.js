@@ -52,3 +52,13 @@ $("#ville").autocomplete({
     }
 });
 }
+
+function addcontact(){
+    var SIRET = document.getElementById('entreprise').value;
+    document.location.href="addcontact.php?SIRET="+SIRET;
+}
+
+function afficherimage(p){
+    document.getElementById('input_text_file').value = p.value;
+    document.getElementById('profile').src = "/photos/"+p.value;
+}
