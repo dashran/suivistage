@@ -15,8 +15,6 @@ if (isset($_POST['submit'])) {
     if (!empty($_POST['nom'])AND ! empty($_POST['prenom'])AND ! empty($_POST['tel']) AND ! empty($_POST['mail'])AND ! empty($_POST['role'])AND ! empty($_POST['service'])AND ! empty($_REQUEST['SIRET'])) {
         $insertmbr = $connection->prepare("INSERT INTO contact(nom, prenom, tel, mail, role, service, SIRET) VALUES(?,?,?,?,?,?,?)");
         $insertmbr->execute(array($nom, $prenom, $tel, $mail, $role, $service, $siret));
-        $sql = "INSERT INTO contact(nom, prenom, tel, mail, role, service, SIRET) VALUES($nom, $prenom, $tel, $mail, $role, $service, $siret)";
-        echo $sql;
         $erreur = "Le contact a bien été ajouté";
     } else {
         $erreur = "Tous les champs doivent être complétés !";
@@ -54,7 +52,7 @@ if (isset($_POST['submit'])) {
                 <input type="text" class="form-control" id="example" name="prenom" placeholder="Prenom">
             </div>
             <div class="form-group">
-                <label for="">Telephone</label>
+                <label for="">Téléphone</label>
                 <input type="text" class="form-control" id="example" name="tel" placeholder="Telephone">
             </div>
             <div class="form-group">
@@ -62,7 +60,7 @@ if (isset($_POST['submit'])) {
                 <input type="text" class="form-control" id="example" name="mail" placeholder="Mail">
             </div>
             <div class="form-group">
-                <label for="">Role</label>
+                <label for="">Rôle</label>
                 <input type="text" class="form-control" id="example" name="role" placeholder="Role">
             </div>
             <div class="form-group">
@@ -79,7 +77,7 @@ if (isset($_POST['submit'])) {
                 echo $ligne ['nom'];
                 ?>
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Ajouter a la base de donnees</button>
+            <button type="submit" class="btn btn-primary" name="submit">Ajouter à la base de données</button>
             <a class="btn btn-success" href="addDemande.php?">Retour</a>
         </form>
     </body>

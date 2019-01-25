@@ -1,17 +1,13 @@
 <?php
-if ($_POST) {
-    $nom = htmlentities($_POST["nom"]);
-    $prenom = htmlentities($_POST["prenom"]);
-    $classe = htmlentities($_POST["classe"]);
-    $photo = htmlentities($_POST["photo"]);
-    $mdp = htmlentities($_POST["mdp"]);
-} else {
-    $nom = htmlentities($_POST["nom"]);
-    $prenom = htmlentities($_POST["prenom"]);
-    $classe = htmlentities($_POST["classe"]);
-    $photo = htmlentities($_POST["photo"]);
-    $mdp = htmlentities($_POST["mdp"]);
-}
+session_start();
+    $nom = htmlentities($_REQUEST["nom"]);
+    $prenom = htmlentities($_REQUEST["prenom"]);
+    $classe = htmlentities($_REQUEST["classe"]);
+    echo $_SESSION["nomImage"];
+    $photo = htmlentities($_SESSION["nomImage"]);
+    $email = htmlentities($_REQUEST["email"]);
+    $mdp = htmlentities($_REQUEST["mdp"]);
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,16 +31,17 @@ if ($_POST) {
                 ?>
                 </br>
                 </br>
-                Votre inscription a bien ete effectuee.
+                Votre inscription à bien été effectuee.
             <p>
                 <input class="button" type="submit" onclick="window.location.href = 'index.php'" value="Retour à l'accueil"/>
             </p>                
             <?php
-            $req = $connection->prepare('INSERT INTO etudiant(nom, prenom, classe, photo, mdp) VALUES(:nom, :prenom, :classe, :photo, :mdp)');
+            $req = $connection->prepare('INSERT INTO etudiant(nom, prenom, classe, email, photo, mdp) VALUES(:nom, :prenom, :classe, :mail, :photo, :mdp)');
             $req->execute(array(
                 'nom' => $nom,
                 'prenom' => $prenom,
                 'classe' => $classe,
+                'mail' => $email,
                 'photo' => $photo,
                 'mdp' => $mdp,
             ));

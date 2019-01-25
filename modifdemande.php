@@ -23,12 +23,12 @@ if (isset($_REQUEST['submit'])) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modifier demande de stage</title>
+        <title>Modifier une demande de stage</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta charset="utf-8">
     </head>
     <body style="margin: 200px;">
-        <h2>Modification demande de stage</h2>
+        <h2>Modification d'une demande de stage</h2>
         <br>
         <?php
         if (isset($erreur)) {
@@ -88,7 +88,7 @@ if (isset($_REQUEST['submit'])) {
                 ?> 
             </div>
             <div class="form-group">
-                <label for="">Periode</label>
+                <label for="">Période</label>
                 <br>
                 <?php
                 $sql = "SELECT * FROM periode";

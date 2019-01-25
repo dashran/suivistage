@@ -1,8 +1,7 @@
 <?php
 session_start();
 include 'connexion.php';
-// si une methode de recherche est selectionnée alors
-
+// si une methode de recherche est selectionnée alors;
     if (isset($_REQUEST['selectR'])) {
     //init variable
     $rech = $_REQUEST['selectR'];
@@ -11,45 +10,52 @@ include 'connexion.php';
     // la requete est selectionnée en fonction de la methode de recherche
     if ($rech == "nom") {
 
-        $sql = "SELECT * FROM entreprise,ville WHERE ville.cpville=entreprise.cpville and nom LIKE '%" . $car . "%'";
+        $sql = "SELECT * FROM entreprise WHERE nom LIKE '%" . $car . "%'";
     } elseif ($rech == "naf") {
 
-        $sql = "SELECT * FROM entreprise,ville WHERE ville.cpville=entreprise.cpville and libelle_NAF LIKE '%" . $car . "%'";
+        $sql = "SELECT * FROM entreprise WHERE code_NAF LIKE '%" . $car . "%'";
     } elseif ($rech == "secteur") {
 
-        $sql = "SELECT * FROM entreprise,ville WHERE ville.cpville=entreprise.cpville and nom_ville LIKE '%" . $car . "%'";
+        $sql = "SELECT * FROM entreprise WHERE cpville LIKE '%" . $car . "%'";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset = "utf-8">
+<html lang="fr">
+    <head>        
         <title>Recherche d'entreprise</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <meta charset="utf-8">
     </head>
     <body>
-        <?php
+        <header>
+            <?php
             include 'barrenav.php';
-        ?>
-        <p> Saississez votre recherche </p>
+            ?>
+        </header>
+        <br><br><br>
         <form action="" method="GET">
-            <label for='exampleFormControlSelect1'>Rechercher par : </label>
             <select class="form-control" id="exampleFormControlSelect1" name="selectR">
                 <option value="nom">Nom</option>
                 <option value="naf">Libellé NAF</option>
                 <option value="secteur">Secteur géographique</option>
             </select>
+            <br>
             <input type = "text" class="form-control" id="exampleFormControlInput1" placeholder="Saississez votre recherche..." name = "termeR">
+            <br>
             <input type="submit" name="s" value="Rechercher"/>
+            
         </form>
         <br><br><br>
         <table class="table">
             <tbody>
                 <th data-column-id="SIRET"> SIRET</th>
                 <th data-column-id="nom">Nom</th> 
-                <th data-column-id="libelle_NAF">Libellé NAF</th>
+                <th data-column-id="code_NAF">Libellé NAF</th>
                 <th data-column-id="telephone">Téléphone</th>
                 <th data-column-id="mail">E-mail</th>
                 <th data-column-id="ville">Ville</th>
@@ -61,7 +67,7 @@ include 'connexion.php';
                     $terme = $_GET["termeR"];
                     $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
                     $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
-                }
+                };
                 if (isset($sql)){
                     $reponse = $connection->query($sql);
                     $nombre=$reponse->rowCount();
@@ -78,10 +84,10 @@ include 'connexion.php';
                             $don = '<tr>
                                 <td>' . $donnees['SIRET'] . '</td>
                                 <td>' . $donnees['nom'] . '</td>
-                                <td>' . $donnees['libelle_NAF'] . '</td>
+                                <td>' . $donnees['code_NAF'] . '</td>
                                 <td>' . $donnees['tel'] . '</td>
                                 <td>' . $donnees['Mail'] . '</td>
-                                <td>' . $donnees['nom_ville'].' '. $donnees['cpville'] . '</td></tr><br/>';
+                                <td>' . $donnees['cpville'].'</td></tr><br/>';
                             echo $don;
                         }
                     }

@@ -20,12 +20,12 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ajouter client</title>
+        <title>Ajouter période de stage</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta charset="utf-8">
     </head>
     <body style="margin: 200px;">
-        <h2>Nouvelle periode de stage</h2>
+        <h2>Nouvelle période de stage</h2>
         <br>
         <?php
         if (isset($erreur)) {
@@ -35,18 +35,18 @@ if (isset($_POST['submit'])) {
         <!--	//permet de rentrer de nouvelles infos clients et de les enregistrer dans la bdd-->
         <form method="POST" action="">
             <div class="form-group">
-                <label for="">Annee</label>
+                <label for="">Année</label>
                 <input type="text" class="form-control" id="example" name="annee" placeholder="Annee">
             </div>
             <div class="form-group">
-                <label for="">Date de debut (AAAA-MM-JJ)</label>
+                <label for="">Date de début (AAAA-MM-JJ)</label>
                 <input type="date" class="form-control" id="example" name="date_debut" placeholder="Debut">
             </div>
             <div class="form-group">
                 <label for="">Date de fin (AAAA-MM-JJ)</label>
                 <input type="date" class="form-control" id="example" name="date_fin" placeholder="Fin">
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Ajouter a la base de donnees</button>
+            <button type="submit" class="btn btn-primary" name="submit">Ajouter à la base de données</button>
             <a class="btn btn-success" href="stage.php?">Retour</a>
         </form>
     </body>

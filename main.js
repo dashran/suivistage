@@ -59,6 +59,5 @@ function addcontact(){
 }
 
 function afficherimage(p){
-    document.getElementById('input_text_file').value = p.value;
-    document.getElementById('profile').src = "/photos/"+p.value;
+    document.getElementById('image').src = "images/"+p.value;
 }

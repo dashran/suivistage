@@ -11,7 +11,7 @@ if (!empty($codeconnect) AND ! empty($mdpconnect)) {
     $userexist = $requser->rowCount();
     if ($userexist == 1) {
         $userinfo = $requser->fetch();
-        $_SESSION['code'] = $userinfo['IDEtudiant'];
+        $_SESSION['code'] = $userinfo['idetudiant'];
         $_SESSION['nomC'] = $codeconnect;
         unset($_SESSION['erreur']);
         header("Location: index.php");

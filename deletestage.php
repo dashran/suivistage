@@ -5,12 +5,12 @@ include('connexion.php');
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Supprimer film</title>
+        <title>Supprimer une période de stage</title>
     </head>
     <body>
         <?php
         $id = $_GET['id'];
-        $requete = "DELETE FROM stage WHERE idstage = '" . $id . "'";
+        $requete = "DELETE FROM periode WHERE idperiode = '" . $id . "'";
         $req = $connection->exec($requete);
         header('location: stage.php');
         ?>

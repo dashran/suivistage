@@ -13,8 +13,6 @@ if (isset($_POST['submit'])) {
     if (!empty($_POST['SIRET'])AND ! empty($_POST['nom'])AND ! empty($_POST['code_NAF']) AND ! empty($_POST['tel'])AND ! empty($_POST['mail'])AND ! empty($_POST['cpville'])) {
         $insertmbr = $connection->prepare("INSERT INTO entreprise(SIRET, nom, code_NAF, tel, mail, cpville) VALUES(?,?,?,?,?,?)");
         $insertmbr->execute(array($siret, $nom, $naf, $tel, $mail, $cp));
-        $sql = "INSERT INTO entreprise(SIRET, nom, code_NAF, tel, mail, cpville) VALUES($siret, $nom, $naf, $tel, $mail, $cp)";
-        echo $sql;
         $erreur = "L'entreprise a bien été ajouté";
     } else {
         $erreur = "Tous les champs doivent être complétés !";
@@ -25,7 +23,7 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ajouter entreprise</title>
+        <title>Ajouter une entreprise</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <meta charset="utf-8">
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -74,7 +72,7 @@ if (isset($_POST['submit'])) {
                 ?> 
             </div>
             <div class="form-group">
-                <label for="">Telephone</label>
+                <label for="">Téléphone</label>
                 <input type="text" class="form-control" id="example" name="tel" placeholder="Telephone">
             </div>
             <div class="form-group">
@@ -87,7 +85,7 @@ if (isset($_POST['submit'])) {
                 <input name="cpville" id="cpville" type="hidden" placeholder="Code Postal">
                 <input name="ville" id="ville" type="text" placeholder="Ville">
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Ajouter a la base de donnees</button>
+            <button type="submit" class="btn btn-primary" name="submit">Ajouter à la base de données</button>
             <a class="btn btn-success" href="addDemande.php?">Retour</a>
         </form>
     </body>
