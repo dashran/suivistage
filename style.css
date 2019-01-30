@@ -178,3 +178,7 @@ td, th {
     height:48px;
     border-radius: 50%;
 }
+
+#corpsaccueil p{
+    font-size : 30px;
+}
