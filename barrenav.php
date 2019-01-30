@@ -9,7 +9,17 @@
         <li><a href="index.php">Accueil</a></li><!--
         --><li><a href="stage.php">Stages</a></li><!--
         --><li><a href="rechercheentreprise.php">Recherche</a></li><!--
-        --><li><a href="recapitulatif.php">Récapitulatif</a></li><!--
+        --><li>
+            <?php
+            if (isset($_SESSION['nomC'])) {
+                if (($_SESSION['nomC'] != "ADMIN")) {
+                    echo '<a href="recapitulatif.php">Récapitulatif</a>';
+                } else {
+                    echo ' <a href="tableaurec.php">Tableaux</a>';
+                }
+            }
+            ?>
+        </li><!--
         --><li>
             <?php
             if (isset($_SESSION['nomC'])) {
@@ -27,9 +37,17 @@
                 $sqlphoto = "SELECT photo FROM etudiant WHERE idetudiant = " . $_SESSION['code'];
                 $q = $connection->query($sqlphoto);
                 $ligne = $q->fetch();
-                echo "<img src='images/" . $ligne['photo'] . "'>";
             }
-            ?> 
+            ?>   
         </li>
+        <li class="imageCompte">
+            <?php
+            include('connexion.php');
+            if (isset($_SESSION['nomC'])) {
+                echo '<div id="imageopt">';
+                echo "<img src='images/" . $ligne['photo'] . "'>";
+                echo "</div>";
+            }
+            ?>
     </ul>
 </nav>

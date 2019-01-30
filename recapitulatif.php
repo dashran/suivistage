@@ -23,7 +23,7 @@ include 'connexion.php';
             <br />
             <div class="row">
                 <br />
-                <h2>Mes périodes de stages</h2>
+                <h2>Périodes de stages</h2>
                 <p>
             </div>
             <p>
@@ -103,7 +103,7 @@ include 'connexion.php';
                                 $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
                                 $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
                             }
-                            $reponse = $connection->query('SELECT * FROM demande, etudiant, etat WHERE etudiant.idetudiant = demande.idetudiant AND demande.idetat =etat.idetat ');
+                            $reponse = $connection->query('SELECT * FROM demande, etudiant, etat WHERE etudiant.idetudiant = demande.idetudiant AND demande.idetat =etat.idetat AND etudiant.idetudiant = ' .$_SESSION['code']);
 
                             while ($donnees = $reponse->fetch()) {
                                 $don = '<tr>

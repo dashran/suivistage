@@ -20,9 +20,9 @@ include 'connexion.php';
         </header>
         <br />
         <div class="container">
-            <br />
+            <br><br><br>
             <div class="row">
-                <br />
+                <br>
                 <h2>Périodes de stages</h2>
                 <p>
             </div>
@@ -52,21 +52,21 @@ include 'connexion.php';
                                <td>' . $donnees['date_debut'] . '</td>
                                <td>' . $donnees['date_fin'] . '</td>';
                             echo $don;
-                            echo '<td>';
-                            echo '<a class="btn btn-success" href="modifstage.php?id=' . $donnees['idperiode'] . '">Modifier</a>'; // un autre td pour le bouton d'update
-                            echo '</td>
-                                <p>';
-                            echo'<td>';
-                            echo '<a class="btn btn-danger" href="deletestage.php?id=' . $donnees['idperiode'] . ' ">Supprimer</a>'; // un autre td pour le bouton de suppression
-                            echo '</td>
-                                <p>';
+//                            echo '<td>';
+//                            echo '<a class="btn btn-success" href="modifstage.php?id=' . $donnees['idperiode'] . '">Modifier</a>'; // un autre td pour le bouton d'update
+//                            echo '</td>
+//                                <p>';
+//                            echo'<td>';
+//                            echo '<a class="btn btn-danger" href="deletestage.php?id=' . $donnees['idperiode'] . ' ">Supprimer</a>'; // un autre td pour le bouton de suppression
+//                            echo '</td>
+//                                <p>';
                             echo '</tr>
                                 <p></tr>'
                             ;
                         }
                         $reponse->closeCursor();
                         $_SESSION['deco'] = '1';
-                        echo '<a class="btn btn-success" href="addStage.php?">Ajouter une periode de stage</a>';
+//                        echo '<a class="btn btn-success" href="addStage.php?">Ajouter une periode de stage</a>';
                         ?>   
                     </tbody>	
                 </table>
@@ -74,7 +74,7 @@ include 'connexion.php';
             <p>
         </div>
         <div class="container">
-            <br />
+            <br><br><br>
             <div class="row">
                 <br />
                 <h2>Demandes effectuées</h2>
@@ -103,10 +103,10 @@ include 'connexion.php';
                                 $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
                                 $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
                             }
-                                $reponse = $connection->query('SELECT * FROM demande, etudiant, etat WHERE etudiant.idetudiant = demande.idetudiant AND demande.idetat =etat.idetat ');
+                            $reponse = $connection->query('SELECT * FROM demande, etudiant, etat WHERE etudiant.idetudiant = demande.idetudiant AND demande.idetat =etat.idetat ');
 
-                                while ($donnees = $reponse->fetch()) {
-                                    $don = '<tr>
+                            while ($donnees = $reponse->fetch()) {
+                                $don = '<tr>
                                <td>' . $donnees['iddemande'] . '</td>
                                <td>' . $donnees['date_demande'] . '</td>
                                <td>' . $donnees['libelle_etat'] . '</td>
@@ -114,35 +114,35 @@ include 'connexion.php';
                                <td>' . $donnees['nom'] . '</td>
                                <td>' . $donnees['idperiode'] . '</td>';
 
-                                    echo $don;
-                                    echo '<td>';
-                                    echo '<a class="btn btn-success" href="modifdemande.php?id=' . $donnees['iddemande'] . '">Modifier</a>'; // un autre td pour le bouton d'update
-                                    echo '</td>
-                                <p>';
-                                    echo'<td>';
-                                    echo '<a class="btn btn-danger" href="deletedemande.php?id=' . $donnees['iddemande'] . ' ">Supprimer</a>'; // un autre td pour le bouton de suppression
-                                    echo '</td>
-                                <p>';
-                                    echo '</tr>
+                                echo $don;
+//                                    echo '<td>';
+//                                    echo '<a class="btn btn-success" href="modifdemande.php?id=' . $donnees['iddemande'] . '">Modifier</a>'; // un autre td pour le bouton d'update
+//                                    echo '</td>
+//                                <p>';
+//                                    echo'<td>';
+//                                    echo '<a class="btn btn-danger" href="deletedemande.php?id=' . $donnees['iddemande'] . ' ">Supprimer</a>'; // un autre td pour le bouton de suppression
+//                                    echo '</td>
+//                                <p>';
+                                echo '</tr>
                                 <p></tr>'
-                                    ;
-                                }
-                                $reponse->closeCursor();
-                                $_SESSION['deco'] = '1';
-                                echo '<a class="btn btn-success" href="addDemande.php?">Ajouter une demande de stage</a>';
-                                ?>   
-                            </tbody>	
-                        </table>
-                        <?php
-                        echo '<a class="btn btn-danger" href="index.php?">Retour au site</a>';
-                        echo "";
-                    } else {
-                        header("Location: log.php?err=1");
-                    }
-                    ?>
-                </div>
-                <p>
+                                ;
+                            }
+                            $reponse->closeCursor();
+                            $_SESSION['deco'] = '1';
+//                                echo '<a class="btn btn-success" href="addDemande.php?">Ajouter une demande de stage</a>';
+                            ?>   
+                        </tbody>	
+                    </table>
+                    <?php
+                    echo '<a class="btn btn-danger" href="index.php?">Retour au site</a>';
+                    echo "";
+                } else {
+                    header("Location: log.php?err=1");
+                }
+                ?>
             </div>
             <p>
-        </body>
-    </html>
+        </div>
+        <p>
+    </body>
+</html>
