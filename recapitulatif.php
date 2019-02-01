@@ -19,7 +19,7 @@ include 'connexion.php';
             ?>
         </header>
         <br />
-        <div class="container">
+        <div class="conteneur">
             <br />
             <div class="row">
                 <br />
@@ -28,7 +28,7 @@ include 'connexion.php';
             </div>
             <p>
                 <br/>
-            <div class="row">
+            <div class="container">
                 <tbody>
                 <table class="table table-bordered">
                     <thead>
@@ -53,27 +53,19 @@ include 'connexion.php';
                                <td>' . $donnees['date_fin'] . '</td>';
                             echo $don;
                             echo '<td>';
-                            echo '<a class="btn btn-success" href="modifstage.php?id=' . $donnees['idperiode'] . '">Modifier</a>'; // un autre td pour le bouton d'update
-                            echo '</td>
-                                <p>';
-                            echo'<td>';
-                            echo '<a class="btn btn-danger" href="deletestage.php?id=' . $donnees['idperiode'] . ' ">Supprimer</a>'; // un autre td pour le bouton de suppression
-                            echo '</td>
-                                <p>';
                             echo '</tr>
                                 <p></tr>'
                             ;
                         }
                         $reponse->closeCursor();
                         $_SESSION['deco'] = '1';
-                        echo '<a class="btn btn-success" href="addStage.php?">Ajouter une periode de stage</a>';
                         ?>   
                     </tbody>	
                 </table>
             </div>
             <p>
         </div>
-        <div class="container">
+        <div class="conteneur">
             <br />
             <div class="row">
                 <br />
@@ -82,7 +74,7 @@ include 'connexion.php';
             </div>
             <p>
                 <br/>
-            <div class="row">
+            <div class="container">
                 <tbody>
                 <table class="table table-bordered">
                     <thead>

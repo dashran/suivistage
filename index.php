@@ -17,14 +17,6 @@ include 'connexion.php';
             include 'barrenav.php';
             ?>
         </header>
-        <br><br>        
-        <div id="corpsaccueil">        
-            <p>Bienvenue sur le site de </p>
-            <p>gestion des stages de </p>
-        </div>
-        <br><br>
-            <img src="./images/stpbb.jpg" alt="panneau stpbb">
-
     </body>
 </html>
 

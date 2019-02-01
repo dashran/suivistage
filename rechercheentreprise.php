@@ -25,11 +25,12 @@ include 'connexion.php';
 <html lang="fr">
     <head>        
         <title>Recherche d'entreprise</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <header>
@@ -38,6 +39,7 @@ include 'connexion.php';
             ?>
         </header>
         <br><br><br>
+        <div class="conteneur">
         <form action="" method="GET">
             <select class="form-control" id="exampleFormControlSelect1" name="selectR">
                 <option value="nom">Nom</option>
@@ -99,6 +101,7 @@ include 'connexion.php';
             ?>
             </tbody>
         </table>
+    </div>
     </body>
 </html>
 

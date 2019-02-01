@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                 <input type="date" class="form-control" id="example" name="date_fin" placeholder="Fin">
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Ajouter à la base de données</button>
-            <a class="btn btn-success" href="stage.php?">Retour</a>
+            <a class="btn btn-success" href="recapitulatif.php?">Retour</a>
         </form>
     </body>
 </html>

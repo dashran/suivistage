@@ -179,6 +179,8 @@ td, th {
     border-radius: 50%;
 }
 
-#corpsaccueil p{
-    font-size : 30px;
+.conteneur{
+
+    margin-left: 5%;
+    margin-right: 5%;
 }

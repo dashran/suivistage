@@ -2,7 +2,7 @@
 session_start();
 include('connexion.php');
 
-if (isset($_POST['submit'])) {
+if (isset($_REQUEST['submit'])) {
 
     $date = $_REQUEST['date_demande'];
     $idetat = $_REQUEST['idetat'];
@@ -13,9 +13,11 @@ if (isset($_POST['submit'])) {
     }
     $idetu = $_REQUEST['idetudiant'];
     $idperio = $_REQUEST['idperiode'];
-    if (!empty($_POST['date_demande'])AND ! empty($_POST['idetat'])AND ! empty($_POST['idetudiant'])AND ! empty($_POST['idperiode'])) {
-        $insertmbr = $connection->prepare("INSERT INTO demande(date_demande, idetat, refus, idetudiant, idperiode) VALUES(?,?,?,?,?)");
-        $insertmbr->execute(array($date, $idetat, $refus, $idetu, $idperio));
+    $ident = $_REQUEST['nomentreprise'];
+    $idcontact = $_REQUEST['nomcontact'];
+    if (!empty($_REQUEST['date_demande'])AND ! empty($_REQUEST['idetat'])AND ! empty($_REQUEST['idetudiant'])AND ! empty($_REQUEST['idperiode'])AND ! empty($_REQUEST['nomentreprise'])AND ! empty($_REQUEST['nomcontact'])) {
+        $insertmbr = $connection->prepare("INSERT INTO demande(date_demande, idetat, refus, idetudiant, idperiode, SIRET, idcontact) VALUES(?,?,?,?,?,?,?)");
+        $insertmbr->execute(array($date, $idetat, $refus, $idetu, $idperio, $ident, $idcontact));
         $erreur = "La demande de stage a bien été ajouté";
     } else {
         $erreur = "Tous les champs doivent être complétés !";
@@ -72,17 +74,12 @@ if (isset($_POST['submit'])) {
                 <label for="">Etudiant</label>
                 <br>
                 <?php
-                $sql = "SELECT * FROM etudiant WHERE type <> 0";
+                $sql = "SELECT * FROM etudiant WHERE type <> 0 AND etudiant.idetudiant = " . $_SESSION['code'];
                 $q = $connection->query($sql);
-                echo "<select name = 'idetudiant' >";
-                while ($ligne = $q->fetch()) {
-                    if ($row['idetudiant'] == $ligne[0])
-                        echo "<option value=" . $ligne[0] . " selected='selected'>" . $ligne[1] . "</option>";
-                    else
-                        echo "<option value=" . $ligne[0] . ">" . $ligne[1] . "</option>";
-                }
-                echo "</select>";
+                $ligne = $q->fetch();
+                echo "<label>" . $ligne[1]."</label>";
                 ?> 
+                <input type ="hidden" name ="idetudiant" value="<?php echo $ligne[0]; ?>"/>
             </div>
             <div class="form-group">
                 <label for="">Periode</label>
@@ -106,17 +103,17 @@ if (isset($_POST['submit'])) {
                 <?php
                 $sql = "SELECT * FROM entreprise";
                 $q = $connection->query($sql);
-                echo "<select id = 'entreprise' name = 'nomentreprise' >";
+                echo "<select id = 'entreprise' name = 'nomentreprise' onchange='contactlie()' >";
                 while ($ligne = $q->fetch()) {
-                    if ($row['nom'] == $ligne[0]){
-                ?>
+                    if ($row['nom'] == $ligne[0]) {
+                        ?>
                         <option value="<?php echo $ligne[0]; ?>" selected="selected"><?php echo $ligne[1]; ?></option>
-                <?php        
-                    }
-                    else
-                ?>        
-                        <option value="<?php echo $ligne[0]; ?>"><?php echo $ligne[1]; ?></option>
-                <?php        
+                        <?php
+                    } else
+                        
+                        ?>        
+                    <option value="<?php echo $ligne[0]; ?>"><?php echo $ligne[1]; ?></option>
+                    <?php
                 }
                 echo "</select>";
                 ?> 
@@ -139,8 +136,8 @@ if (isset($_POST['submit'])) {
                 ?> 
                 <a class="btn btn-danger" onClick="addcontact()">Ajouter un contact</a>
             </div>
-            <button type="submit" class="btn btn-primary" name="submit">Ajouter a la base de donnees</button>
-            <a class="btn btn-success" href="stage.php?">Retour</a>
+            <button type="submit" class="btn btn-primary" value="submit" name="submit">Ajouter a la base de donnees</button>
+            <a class="btn btn-success" href="recapitulatif.php?">Retour</a>
         </form>
     </body>
 </html>
