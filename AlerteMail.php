@@ -11,8 +11,8 @@ $dateJour = date("y-m-d");//Date du jour
                 AND DATEDIFF(CURRENT_DATE, date_demande)>=30
                 AND idrelance in (select idrelance
 			from relance
-			where DATEDIFF(CURRENT_DATE, date_alerteRelance)>=7
-			OR date_alerteRelance IS null)
+			where DATEDIFF(CURRENT_DATE, date_envoieRelance)>=7
+			OR date_envoieRelance IS null)
                 AND idrelance in (select idrelance
 			from relance
 			where DATEDIFF(CURRENT_DATE, date_relance)>=30
