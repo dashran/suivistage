@@ -4,6 +4,7 @@
 <div id="top_img">
 </div>
 <!--//barre de navigation du site-->
+<img src="images/stage.jpg" alt=""/>
 <nav>
     <ul>
         <li><a href="index.php">Accueil</a></li><!--

@@ -23,9 +23,9 @@ include 'connexion.php';
                 <h3>Recapitulatif entreprise</h3>
                 <br>
                 <tr>
-                    <th data-column-id="id" data-type="numeric" data-identifier="true">Entreprise</th>
-                    <th data-column-id="raisonrefus">Nombre de demandes faites</th>
-                    <th data-column-id="datedemande">Nombre de stagiaires pris</th>
+                    <th data-column-id="entreprise" data-type="numeric" data-identifier="true">Entreprise</th>
+                    <th data-column-id="demandefaite">Nombre de demandes faites</th>
+                    <th data-column-id="stagiarepris">Nombre de stagiaires pris</th>
                 </tr>
                 <?php
                 if (isset($_SESSION['nomC'])) {
@@ -64,9 +64,9 @@ include 'connexion.php';
                 <h3>Recapitulatif promotion</h3>
                 <br>
                 <tr>
-                    <th data-column-id="id" data-type="numeric" data-identifier="true">Classe</th>
-                    <th data-column-id="raisonrefus">Nombre d'élèves</th>
-                    <th data-column-id="datedemande">Nombre d'élèves avec un stage</th>
+                    <th data-column-id="classe" data-type="numeric" data-identifier="true">Classe</th>
+                    <th data-column-id="nbeleves">Nombre d'élèves</th>
+                    <th data-column-id="nbelevesstages">Nombre d'élèves avec un stage</th>
                 </tr>
                 <tr>
 
@@ -92,6 +92,80 @@ include 'connexion.php';
                         $donnees2 = $reponse2->fetch();
                         echo "<td>" . $donnees2['nb_eleves_pris'] . "</td>";
                         echo '</tr>';
+                    }
+                    $reponse->closeCursor();
+                    $_SESSION['deco'] = '1';
+                    ?>   	
+                </table>
+            </div>
+
+            <?php
+            echo "";
+        } else {
+            header("Location: log.php?err=1");
+        }
+        ?>
+        <br><br>
+        <div class="conteneur">
+            <table class="table table-bordered">
+                <h3>Récapitulatif élèves</h3>
+                <br>
+                <tr>
+                    <th data-column-id="id" data-type="numeric" data-identifier="true">Nom de l'élève</th>
+                    <th data-column-id="raisonrefus">Nombre de demandes faites</th>
+                    <th data-column-id="datedemande">Demandes acceptées</th>
+                    <th data-column-id="datedemande">Demandes en attente</th>
+                    <th data-column-id="datedemande">Demandes refusées</th>
+                </tr>
+                <tr>
+
+                </tr>
+                <?php
+                if (isset($_SESSION['nomC'])) {
+                    if (isset($_GET["s"]) AND $_GET["s"] == "Rechercher") {
+                        $_GET["termeR"] = htmlspecialchars($_GET["termeR"]); //pour sécuriser le formulaire contre les failles html
+                        $terme = $_GET["termeR"];
+                        $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
+                        $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
+                    }
+                    $reponse = $connection->query('SELECT e.idetudiant, e.nom, e.prenom,count(*) as nb_demandes FROM etudiant e, periode p, demande d, classe c WHERE e.idetudiant = d.idetudiant AND d.idperiode = p.idperiode AND c.idclasse = e.idclasse
+                    AND p.annee IN (YEAR(CURDATE()),YEAR(CURDATE())-1) AND c.idclasse NOT IN (3,4) GROUP BY e.idetudiant, e.nom, e.prenom');
+                    while ($donnees = $reponse->fetch()) {
+                        echo '<tr>';
+                        echo "<td>" . $donnees['nom'] . " " . $donnees['prenom'] . "</td>";
+                        echo "<td>" . $donnees['nb_demandes'] . "</td>";
+                        $sql2 = "SELECT e.idetudiant, e.nom, e.prenom,count(*) as nb_demandes_accepte FROM etudiant e, periode p, demande d, classe c WHERE e.idetudiant = d.idetudiant AND d.idperiode = p.idperiode AND c.idclasse = e.idclasse"
+                                . " AND e.idetudiant=" . $donnees['idetudiant'] . " AND d.idetat = 4  AND p.annee IN (YEAR(CURDATE()),YEAR(CURDATE())-1)";
+                        $reponse2 = $connection->query($sql2);
+                        $donnees2 = $reponse2->fetch();
+                        echo "<td>" . $donnees2['nb_demandes_accepte'] . "</td>";
+                        $sql3 = "SELECT e.idetudiant, e.nom, e.prenom,count(*) as nb_demandes_attente FROM etudiant e, periode p, demande d, classe c WHERE e.idetudiant = d.idetudiant AND d.idperiode = p.idperiode AND c.idclasse = e.idclasse"
+                                . " AND e.idetudiant=" . $donnees['idetudiant'] . " AND d.idetat = 5  AND p.annee IN (YEAR(CURDATE()),YEAR(CURDATE())-1)";
+                        $reponse3 = $connection->query($sql3);
+                        $donnees3 = $reponse3->fetch();
+                        echo "<td>" . $donnees3['nb_demandes_attente'] . "</td>";
+                        $sql4 = "SELECT e.idetudiant, e.nom, e.prenom,count(*) as nb_demandes_refuse FROM etudiant e, periode p, demande d, classe c WHERE e.idetudiant = d.idetudiant AND d.idperiode = p.idperiode AND c.idclasse = e.idclasse"
+                                . " AND e.idetudiant=" . $donnees['idetudiant'] . " AND d.idetat = 6  AND p.annee IN (YEAR(CURDATE()),YEAR(CURDATE())-1)";
+                        $reponse4 = $connection->query($sql4);
+                        $donnees4 = $reponse4->fetch();
+                        echo "<td>" . $donnees4['nb_demandes_refuse'] . "</td>";
+                        echo '</tr>';
+                    }
+                    $reponse->closeCursor();
+                    $reponse = $connection->query('SELECT nom, prenom FROM etudiant e, classe c WHERE idetudiant not in (SELECT idetudiant
+                                                                                                                        FROM demande d,periode p
+                                                                                                                        WHERE p.idperiode = d.idperiode
+                                                                                                                        AND p.annee IN (YEAR(CURDATE()),YEAR(CURDATE())-1))
+                                                AND c.idclasse NOT IN (3,4)
+                                                AND c.idclasse = e.idclasse');
+                    while ($donnees = $reponse->fetch()) {
+                        echo '<tr>';
+                        echo "<td>" . $donnees['nom'] . " " . $donnees['prenom'] . "</td>";
+                        echo "<td>0</td>";
+                        echo "<td>0</td>";
+                        echo "<td>0</td>";
+                        echo "<td>0</td>";
+                        echo "</tr>";
                     }
                     $reponse->closeCursor();
                     $_SESSION['deco'] = '1';
