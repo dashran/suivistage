@@ -45,7 +45,7 @@ if (isset($_REQUEST['submit'])) {
         }
         ?>
         <!--	//permet de rentrer de nouvelles infos clients et de les enregistrer dans la bdd-->
-        <form method="POST" action="">
+        <form method="GET" action="">
             <div class="form-group">
                 <label for="">Date de la demande</label>
                 <input type="date" class="form-control" id="example" name="date_demande" placeholder="Date de la demande">

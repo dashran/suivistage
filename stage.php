@@ -34,8 +34,8 @@ include 'connexion.php';
                     <thead>
                         <tr>
                             <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
-                            <th data-column-id="annee">Annee</th>
-                            <th data-column-id="datedebut">Date Debut (AAAA-MM-JJ)</th>
+                            <th data-column-id="annee">Année</th>
+                            <th data-column-id="datedebut">Date Début (AAAA-MM-JJ)</th>
                             <th data-column-id="datefin">Date Fin (AAAA-MM-JJ)</th>
                     </thead>
                     <tbody>
@@ -77,7 +77,7 @@ include 'connexion.php';
             <br><br><br>
             <div class="row">
                 <br />
-                <h2>Demandes effectuées</h2>
+                <h2>Toutes les demandes effectuées</h2>
                 <p>
             </div>
             <p>
@@ -87,10 +87,10 @@ include 'connexion.php';
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th data-column-id="id" data-type="numeric" data-identifier="true">Demande</th>
+                            <th data-column-id="id" data-type="numeric" data-identifier="true">Entreprise</th>
                             <th data-column-id="datedemande">Date de la demande</th>
                             <th data-column-id="raisonrefus">Etat</th>
-                            <th data-column-id="datedemande">Refus</th>
+                            <th data-column-id="datedemande">Raison du refus</th>
                             <th data-column-id="raisonrefus">Etudiant</th>
                             <th data-column-id="raisonrefus">Periode</th>
                     </thead>
@@ -103,16 +103,18 @@ include 'connexion.php';
                                 $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
                                 $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
                             }
-                            $reponse = $connection->query('SELECT * FROM demande, etudiant, etat WHERE etudiant.idetudiant = demande.idetudiant AND demande.idetat =etat.idetat ');
+                            $reponse = $connection->query('SELECT ent.nom AS nomEnt, etu.nom, d.date_demande, eta.libelle_etat, d.refus, p.date_debut, p.date_fin '
+                                    . 'FROM demande d, etudiant etu, entreprise ent, etat eta, periode p '
+                                    . 'WHERE etu.idetudiant = d.idetudiant AND ent.SIRET = d.SIRET AND d.idetat =eta.idetat AND p.idperiode = d.idperiode ORDER BY d.date_demande ');
 
                             while ($donnees = $reponse->fetch()) {
                                 $don = '<tr>
-                               <td>' . $donnees['iddemande'] . '</td>
+                               <td>' . $donnees['nomEnt'] . '</td>
                                <td>' . $donnees['date_demande'] . '</td>
                                <td>' . $donnees['libelle_etat'] . '</td>
                                <td>' . $donnees['refus'] . '</td>  
                                <td>' . $donnees['nom'] . '</td>
-                               <td>' . $donnees['idperiode'] . '</td>';
+                               <td>' . $donnees['date_debut'].' / '.$donnees['date_fin'] . '</td>';
 
                                 echo $don;
 //                                    echo '<td>';
@@ -134,8 +136,6 @@ include 'connexion.php';
                         </tbody>	
                     </table>
                     <?php
-                    echo '<a class="btn btn-danger" href="index.php?">Retour au site</a>';
-                    echo "";
                 } else {
                     header("Location: log.php?err=1");
                 }
@@ -143,6 +143,5 @@ include 'connexion.php';
             </div>
             <p>
         </div>
-        <p>
     </body>
 </html>

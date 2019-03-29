@@ -73,7 +73,7 @@ include 'connexion.php';
                 <p>
             </div>
             <p>
-                <br/>
+                <br>
             <div class="container">
                 <tbody>
                 <table class="table table-bordered">
@@ -109,18 +109,14 @@ include 'connexion.php';
                                 echo $don;
                                 echo '<td>';
                                 echo '<a class="btn btn-success" href="modifdemande.php?id=' . $donnees['iddemande'] . '">Modifier</a>'; // un autre td pour le bouton d'update
-                                echo '</td>
-                                <p>';
+                                echo '</td><p>';
                                 echo'<td>';
                                 echo '<a class="btn btn-danger" href="deletedemande.php?id=' . $donnees['iddemande'] . ' ">Supprimer</a>'; // un autre td pour le bouton de suppression
-                                echo '</td>
-                                <p>';
-                                echo '</tr>
-                                <p></tr>'
-                                ;
+                                echo '</td><p>';  
                             }
                             $reponse->closeCursor();
                             $_SESSION['deco'] = '1';
+                          
                             echo '<a class="btn btn-success" href="addDemande.php?">Ajouter une demande de stage</a>';
                             ?>   
                         </tbody>	

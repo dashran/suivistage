@@ -61,3 +61,10 @@ function addcontact(){
 function afficherimage(p){
     document.getElementById('image').src = "images/"+p.value;
 }
+
+function changeEtat($i){
+    $n=1;
+    while ($n <= $i){
+        e = document.getElementById('scales'+$n).value;
+    }   
+}

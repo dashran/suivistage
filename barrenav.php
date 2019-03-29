@@ -7,8 +7,17 @@
 <img src="images/stage.jpg" alt=""/>
 <nav>
     <ul>
-        <li><a href="index.php">Accueil</a></li><!--
-        --><li><a href="stage.php">Stages</a></li><!--
+        <li>
+            <?php
+            if (isset($_SESSION['nomC'])) {
+                if (($_SESSION['nomC'] != "ADMIN")) {
+                } else {
+                    echo ' <a href="gestioneleve.php">Gestion élèves</a>';
+                }
+            }
+            ?>
+        </li>
+            <li><a href="stage.php">Stages</a></li><!--
         --><li><a href="rechercheentreprise.php">Recherche</a></li><!--
         --><li>
             <?php
@@ -20,21 +29,12 @@
                 }
             }
             ?>
-        </li><!--
-        --><li>
-            <?php
-            if (isset($_SESSION['nomC'])) {
-                echo '<a href="logout.php">Deconnexion</a>';
-            } else {
-                echo ' <a href="log.php">Connexion</a>';
-            }
-            ?>
         </li>
         <li class="nomCompte"> 
             <?php
             include('connexion.php');
-            if (isset($_SESSION['nomC'])) {
-                echo $_SESSION['nomC'];
+            if (isset($_SESSION['nomC'])) {        
+                echo '<a id="profil" href="infoutil.php">'. $_SESSION['nomC'] .'</a>';
                 $sqlphoto = "SELECT photo FROM etudiant WHERE idetudiant = " . $_SESSION['code'];
                 $q = $connection->query($sqlphoto);
                 $ligne = $q->fetch();
@@ -50,5 +50,15 @@
                 echo "</div>";
             }
             ?>
+        </li>
+        <li>
+            <?php
+            if (isset($_SESSION['nomC'])) {
+                echo '<a id="deco" href="logout.php">Deconnexion</a>';
+            } else {
+                echo '<a id="co" href="log.php">Connexion</a>';
+            }
+            ?>
+        </li>
     </ul>
 </nav>

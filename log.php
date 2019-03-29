@@ -123,14 +123,15 @@ if (!empty($_REQUEST)) {
         </div>
         <!-- Fin modal -->
         <br><br><br>
-                    <section>
-                        <div id="container_demo" >
+                <div id="conteneurlog">
+                        <div id="partieconnect" >
                             <a class="hiddenanchor" id="toregister"></a>
                             <a class="hiddenanchor" id="tologin"></a>
                             <div id="wrapper">
                                 <div id="login" class="animate form">
                                     <form  action="connexionetudiant.php" method="POST"> 
                                         <!--						//champs pour se connecter avec son compte, appelle laconnexion.php-->
+                                        <br><br><br><br>
                                         <h1>Se connecter</h1>
                                         <br>
                                             <p>
@@ -146,7 +147,6 @@ if (!empty($_REQUEST)) {
                                 </div>
                             </div>
                         </div>
-                    </section>
                     <div id="register" class="animate form">  
                         <!--//champs pour se créer un compte et l'ajouter a la bdd-->
                         <h1>Créer un compte</h1> 
@@ -171,7 +171,7 @@ if (!empty($_REQUEST)) {
                                 <p>
                                     Classe :  
                                     <?php
-                                    $sql = "SELECT * FROM classe";
+                                    $sql = "SELECT * FROM classe WHERE idclasse < 3";
                                     $q = $connection->query($sql);
                                     echo "<select name = 'classe' >";
                                     while ($ligne = $q->fetch()) {
@@ -192,6 +192,7 @@ if (!empty($_REQUEST)) {
                                 <input type="submit" name="submit" value="Créer" />
                             </form>
                     </div>
+                </div>
                     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"/></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"/></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"/></script>

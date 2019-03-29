@@ -6,17 +6,16 @@ include('connexion.php');
 $id = $_REQUEST['id'];
 if (isset($_REQUEST['submit'])) {
 
-    $id = $_REQUEST['iddemande'];
+    $id = $_REQUEST['id'];
     $date = $_REQUEST['date_demande'];
     $idetat = $_REQUEST['idetat'];
     $refus = $_REQUEST['refus'];
     $idetu = $_REQUEST['idetudiant'];
     $idperio = $_REQUEST['idperiode'];
-    $sql = "UPDATE demande SET iddemande = ?,date_demande = ?,idetat = ?,refus = ?,idetudiant = ?,idperiode = ? WHERE iddemande ='" . $id . "'";
+    $sql = "UPDATE demande SET date_demande = ?,idetat = ?,refus = ?,idetudiant = ?,idperiode = ? WHERE iddemande ='" . $id . "'";
     $q = $connection->prepare($sql);
-    $q->execute(array($id, $date, $idetat, $refus, $idetu, $idperio));
-
-    header('location: stage.php');
+    $q->execute(array($date, $idetat, $refus, $idetu, $idperio));
+    header('location: recapitulatif.php');
 }
 ?>
 
@@ -44,8 +43,7 @@ if (isset($_REQUEST['submit'])) {
         <!--	//champs permettant de modifier les infos d'un client et d'enregistrer les modifs dans la bdd-->
         <form method="GET" action="">
             <div class="form-group">
-                <label for="">ID Demande</label>
-                <input type="text" class="form-control" id="example" name="iddemande" value=<?php echo $row['iddemande']; ?>>
+                <input type="hidden" class="form-control" id="example" name="id" value="<?php echo $id; ?>">
             </div>
             <div class="form-group">
                 <label for="">Date de la demande</label>
@@ -104,7 +102,7 @@ if (isset($_REQUEST['submit'])) {
                 ?> 
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Modifier dans la base de donnees</button>
-            <a class="btn btn-success" href="stage.php?">Retour</a>
+            <a class="btn btn-success" href="recapitulatif.php?">Retour</a>
         </form>
     </body>
 </html>

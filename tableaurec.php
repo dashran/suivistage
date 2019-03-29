@@ -20,7 +20,7 @@ include 'connexion.php';
         <br><br>
         <div class="conteneur">
             <table class="table table-bordered">
-                <h3>Recapitulatif entreprise</h3>
+                <h3>Récapitulatif entreprise</h3>
                 <br>
                 <tr>
                     <th data-column-id="entreprise" data-type="numeric" data-identifier="true">Entreprise</th>
@@ -61,7 +61,7 @@ include 'connexion.php';
         <br><br>
         <div class="conteneur">
             <table class="table table-bordered">
-                <h3>Recapitulatif promotion</h3>
+                <h3>Récapitulatif promotion</h3>
                 <br>
                 <tr>
                     <th data-column-id="classe" data-type="numeric" data-identifier="true">Classe</th>

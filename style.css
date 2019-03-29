@@ -88,8 +88,16 @@ nav a {
 }
 
 nav a:hover {
-    background-color: white;
+    background-color: lightgray;
     color: rgb(66,108,164);
+}
+
+nav a#co {
+    color: greenyellow;
+}
+
+nav a#deco {
+    color: red;
 }
 
 #slider
@@ -185,4 +193,10 @@ td, th {
 
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#conteneurlog
+{
+    display: flex;
+    justify-content: space-around;
 }

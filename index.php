@@ -17,6 +17,7 @@ include 'connexion.php';
             include 'barrenav.php';
             ?>
         </header>
+        <p><br>
     </body>
 </html>
 

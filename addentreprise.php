@@ -2,21 +2,22 @@
 session_start();
 include('connexion.php');
 
-if (isset($_POST['submit'])) {
+if (isset($_REQUEST['submit'])) {
 
-    $siret = $_POST['SIRET'];
-    $nom = $_POST['nom'];
-    $naf = $_POST['code_NAF'];
-    $tel = $_POST['tel'];
-    $mail = $_POST['mail'];
-    $cp = $_POST['cpville'];
-    if (!empty($_POST['SIRET'])AND ! empty($_POST['nom'])AND ! empty($_POST['code_NAF']) AND ! empty($_POST['tel'])AND ! empty($_POST['mail'])AND ! empty($_POST['cpville'])) {
-        $insertmbr = $connection->prepare("INSERT INTO entreprise(SIRET, nom, code_NAF, tel, mail, cpville) VALUES(?,?,?,?,?,?)");
-        $insertmbr->execute(array($siret, $nom, $naf, $tel, $mail, $cp));
+    $siret = $_REQUEST['SIRET'];
+    $nom = $_REQUEST['nom'];
+    $naf = $_REQUEST['code_NAF'];
+    $tel = $_REQUEST['tel'];
+    $mail = $_REQUEST['mail'];
+    $cp = $_REQUEST['cpville'];
+    if (!empty($_REQUEST['SIRET'])AND ! empty($_REQUEST['nom'])AND ! empty($_REQUEST['code_NAF']) AND ! empty($_REQUEST['tel'])AND ! empty($_REQUEST['mail'])AND ! empty($_REQUEST['cpville'])) {
+        $insertmbr = $connection->prepare("INSERT INTO entreprise(SIRET, nom, code_NAF, tel, mail, cpville, nb_demande) VALUES(?,?,?,?,?,?,?)");
+        $insertmbr->execute(array($siret, $nom, $naf, $tel, $mail, $cp, 0));
         $erreur = "L'entreprise a bien été ajouté";
     } else {
         $erreur = "Tous les champs doivent être complétés !";
     }
+    //header('location: addDemande.php');
 }
 ?>
 
@@ -46,7 +47,7 @@ if (isset($_POST['submit'])) {
         }
         ?>
         <!--	//permet de rentrer de nouvelles infos clients et de les enregistrer dans la bdd-->
-        <form method="POST" action="">
+        <form method="GET" action="">
             <div class="form-group">
                 <label for="">SIRET</label>
                 <input type="text" class="form-control" id="example" name="SIRET" placeholder="SIRET">

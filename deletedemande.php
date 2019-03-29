@@ -12,7 +12,7 @@ include('connexion.php');
         $id = $_GET['id'];
         $requete = "DELETE FROM demande WHERE iddemande = '" . $id . "'";
         $req = $connection->exec($requete);
-        header('location: stage.php');
+        header('location: recapitulatif.php');
         ?>
         <!--//permet de supprimer un client de la base de donnees-->
     </body>
